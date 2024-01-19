@@ -1,4 +1,4 @@
-#include "include/fractals.h"
+#include "fractals.h"
 #include <omp.h>
 
 #define MAXCOUNT 30	//broj iteracija petlje
@@ -10,7 +10,7 @@ float left = -1.75;
 float top = -0.25;
 float xside = 0.25;
 float yside = 0.45;
-
+/*
 void fractal(float left, float top, float xside, float yside)
 {
 	float xscale, yscale, zx, zy, cx, tempx, cy;
@@ -62,10 +62,8 @@ void fractal(float left, float top, float xside, float yside)
 				count = count + 1;
 			}
 
-            		/* Oboji taj pixel s bojom count (definirane su
-			u graphics.h) */
-
 			putpixel(x, y, count);
 		}
 	}
 }
+*/
