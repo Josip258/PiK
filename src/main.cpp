@@ -167,10 +167,10 @@ int main( int argc, char* args[] )
 						case SDLK_ESCAPE:
 							quit = true;break;
 
-						case SDLK_PAGEUP:
+						case SDLK_PAGEDOWN:
 							camera->zoom *= 0.5;update_screen();break;
 
-						case SDLK_PAGEDOWN:
+						case SDLK_PAGEUP:
 							camera->zoom *= 2;update_screen();break;
 
 						case SDLK_a:
@@ -185,19 +185,30 @@ int main( int argc, char* args[] )
 						case SDLK_s:
 							camera->pos.second += 1 * camera->zoom * 500;update_screen();break;
 
+						case SDLK_LEFT:
+							camera->pos.first += -1 * camera->zoom * 500;update_screen();break;
+
+						case SDLK_RIGHT:
+							camera->pos.first += 1 * camera->zoom * 500;update_screen();break;
+
+						case SDLK_UP:
+							camera->pos.second += -1 * camera->zoom * 500;update_screen();break;
+
+						case SDLK_DOWN:
+							camera->pos.second += 1 * camera->zoom * 500;update_screen();break;
+
+						case SDLK_PLUS:
+							camera->zoom *= 0.5;update_screen();break;
+
+						case SDLK_MINUS:
+							camera->zoom *= 2;update_screen();break;
+
 						default:
 							break;
 					}
 
 				}
 			}
-
-			//Clear screen
-			//SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-        	//SDL_RenderClear( gRenderer );
-
-			//Update screen
-        	//SDL_RenderPresent( gRenderer );
 		
 			if(SDL_GetTicks() - startTime < DISPLAY_FRAME_TIME){
 				SDL_Delay( DISPLAY_FRAME_TIME - (SDL_GetTicks() - startTime) );
