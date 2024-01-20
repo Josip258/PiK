@@ -1,5 +1,5 @@
 # PiK
-Projekt na predmetu paralelizam i konkurentnost. Prikaz Mandelbrotovog seta pomoču biblioteka SDL2 i OpenMP.
+Projekt na predmetu paralelizam i konkurentnost. Prikaz Mandelbrotovog seta pomoću biblioteka SDL2 i OpenMP.
 
 W, ↑ - pomakni kameru gore <br />
 S, ↓ - pomakni kameru dolje <br />
