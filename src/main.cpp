@@ -3,9 +3,10 @@
 
 #include <string>
 #include <iostream>
-#include <fstream>
 #include <string>
-#include <time.h>
+
+#include "camera.hpp"
+#include "draw.hpp"
 
 //Govori opercijskom sustavu da koristi najbrzu grafičku karticu
 extern "C" 
@@ -20,8 +21,8 @@ extern "C"
 
 //Screen dimension constants
 bool FULLSCREEN = 0;
-int SCREEN_WIDTH = 800;
-int SCREEN_HEIGHT = 600;
+int SCREEN_WIDTH = 1920;
+int SCREEN_HEIGHT = 1080;
 
 const int DISPLAY_FPS = 60;
 const int DISPLAY_FRAME_TIME = 1000 / DISPLAY_FPS;
@@ -45,6 +46,25 @@ SDL_Renderer* gRenderer = NULL;
 Uint32 startTime = 0;
 
 bool keys[1024];
+
+Camera* camera = new Camera{{-0.761574, -0.0847596}, 0.0025};
+
+void update_screen(){
+	Uint32 startTime = SDL_GetTicks();
+
+	//Clear screen
+	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    SDL_RenderClear( gRenderer );
+
+	draw_screen(SCREEN_WIDTH, SCREEN_HEIGHT, camera, gRenderer);
+
+	//Update screen
+    SDL_RenderPresent( gRenderer );
+
+	float endTime = (float)(SDL_GetTicks() - startTime) / (float)1000;
+
+	std::cout << "X: " << camera->pos.first << std::endl << "Y: " << camera->pos.second << std::endl << "Zoom: " << camera->zoom << std::endl << "Time(seconds): " << endTime << std::endl << std::endl;
+}
 
 bool init()
 {
@@ -116,8 +136,6 @@ void close()
 
 int main( int argc, char* args[] )
 {
-	srand( time(NULL) );
-	
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -131,6 +149,8 @@ int main( int argc, char* args[] )
 		//Event handler
 		SDL_Event e;
 
+		update_screen();
+
 		//While application is running
 		while( !quit )
 		{
@@ -140,22 +160,49 @@ int main( int argc, char* args[] )
 				if( e.type == SDL_QUIT ) //User requests quit
 				{
 					quit = true;
+				} else if( e.type == SDL_KEYDOWN ){
+					
+					switch( e.key.keysym.sym )
+					{
+						case SDLK_ESCAPE:
+							quit = true;break;
+
+						case SDLK_PAGEUP:
+							camera->zoom *= 0.5;update_screen();break;
+
+						case SDLK_PAGEDOWN:
+							camera->zoom *= 2;update_screen();break;
+
+						case SDLK_a:
+							camera->pos.first += -1 * camera->zoom * 500;update_screen();break;
+
+						case SDLK_d:
+							camera->pos.first += 1 * camera->zoom * 500;update_screen();break;
+
+						case SDLK_w:
+							camera->pos.second += -1 * camera->zoom * 500;update_screen();break;
+
+						case SDLK_s:
+							camera->pos.second += 1 * camera->zoom * 500;update_screen();break;
+
+						default:
+							break;
+					}
+
 				}
 			}
 
 			//Clear screen
-			SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-        	SDL_RenderClear( gRenderer );
+			//SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        	//SDL_RenderClear( gRenderer );
 
 			//Update screen
-        	SDL_RenderPresent( gRenderer );
+        	//SDL_RenderPresent( gRenderer );
 		
 			if(SDL_GetTicks() - startTime < DISPLAY_FRAME_TIME){
 				SDL_Delay( DISPLAY_FRAME_TIME - (SDL_GetTicks() - startTime) );
 			}
-
 			startTime = SDL_GetTicks();
-
 		}
 	}
 
