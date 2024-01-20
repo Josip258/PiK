@@ -17,7 +17,7 @@ void draw_screen(int width, int height, Camera* camera, SDL_Renderer* gRenderer)
     \param x,y koordinate ekrana
     \param camera camera
 */
-void draw_pixel(int x, int y, int width, int height, Camera* camera, SDL_Renderer* gRenderer);
+void draw_pixel(int x, int y, int* color, SDL_Renderer* gRenderer);
 
 /*
     \itaration iteracija trenutnog piksela
