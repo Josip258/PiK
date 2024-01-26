@@ -8,6 +8,6 @@ D, → - pomakni kameru desno <br />
 PAGE_UP, MINUS - zoom out <br />
 PAGE_DOWN, PLUS - zoom in <br />
 
-![alt text](https://github.com/Mijudin/PiK/blob/main/screenshot1.png?raw=true) <br />
-![alt text](https://github.com/Mijudin/PiK/blob/main/screenshot2.png?raw=true) <br />
-![alt text](https://github.com/Mijudin/PiK/blob/main/screenshot3.png?raw=true) <br />
+![alt text](https://github.com/Mijudin/PiK/blob/main/doc/screenshot1.png?raw=true) <br />
+![alt text](https://github.com/Mijudin/PiK/blob/main/doc/screenshot2.png?raw=true) <br />
+![alt text](https://github.com/Mijudin/PiK/blob/main/doc/screenshot3.png?raw=true) <br />
