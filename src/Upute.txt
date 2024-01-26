@@ -1,0 +1,20 @@
+Osim standardnih biblioteka C++-a koristi se SDL2. Radi lakšeg korištenja, ostavili smo SDL2 
+biblioteku u mapi. Za kompajliranje je potreban samo kompajler koji može izgrađivati 64-bitne
+programe (mi smo koristili MinGW-w64).
+
+Kompajlanje:
+Pozicionirajte se unutar src/ mape (tamo gdje se nalazi ova .txt datoteka) i iz cmd-a pokrenite
+naredbu: 
+g++ -c src/*.cpp -std=c++14 -g -Wall -fopenmp -m64 -I include -I".\SDL2-w64\include" && g++ *.o -o bin/main -L".\SDL2-w64\lib" -fopenmp -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -static-libgcc -static-libstdc++ -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic
+
+Nakon što se izvršila naredba, u bin/ mapi se pojavljuje .exe datoteka. Otvaranjem datoteke
+otvara se grafički prozor koji prikazuje Mandelbrot-ov set i terminal koji govori informacije
+poput: vremena potrebnog za računanje, centar ekrana u koordinatnom sustavu i jačina zooma.
+
+Upravljanje kamere:
+W, ↑ - pomakni kameru gore
+S, ↓ - pomakni kameru dolje
+A, ← - pomakni kameru lijevo
+D, → - pomakni kameru desno
+PAGE_UP, MINUS - zoom out
+PAGE_DOWN, PLUS - zoom in
